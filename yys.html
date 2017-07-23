@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <title>碎片</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+    	.has{
+    		background:#ffefff;
+    	}
+    </style>
+</head>
+<body>
+<header>
+    <h4 class="text-center">碎片统计</h4>
+</header>
+<div id="app" class="table-responsive">
+	<table class="table table-hover table-bordered">
+		<thead><tr><td v-for="item in tableHead">{{item}}</td></tr></thead>
+		<tbody><tr :class="{'has':!item.state&&item.has}" v-for="item in arr"><td>{{item.index}}</td><td>{{item.name}}</td><td>{{item.xll}}</td><td>{{item.ssr}}</td><td>{{item.sss}}</td><td>{{item.xll+item.ssr+item.sss}}</td><td>{{item.state?'有':'没有'}}</td></tr></tbody>
+	</table>
+</div>
+</body>
+<script>
+var app = new Vue({
+	el:'#app',
+	data:{
+		tableHead:[
+			'序号',
+			'名称',
+			'大号',
+			'小号1',		
+			'小号2',
+			'总计',
+			'状态'
+		],
+		arr:[
+			{index:1,name:'大天狗',xll:17,ssr:0,sss:0,state:1,has:false},
+			{index:2,name:'酒吞童子',xll:5,ssr:14,sss:0,state:1,has:false},
+			{index:3,name:'荒川之主',xll:15,ssr:1,sss:2,state:1,has:false},
+			{index:4,name:'阎魔',xll:38,ssr:0,sss:11,state:0,has:false},
+			{index:5,name:'两面佛',xll:'-',ssr:'-',sss:'-',state:1,has:false},
+			{index:6,name:'小鹿男',xll:22,ssr:17,sss:15,state:0,has:false},
+			{index:7,name:'茨木童子',xll:28,ssr:14,sss:0,state:0,has:false},
+			{index:8,name:'青行灯',xll:1,ssr:18,sss:17,state:1,has:false},
+			{index:9,name:'妖刀姬',xll:11,ssr:0,sss:0,state:1,has:false},
+			{index:10,name:'一目连',xll:18,ssr:0,sss:0,state:1,has:false},
+			{index:11,name:'花鸟卷',xll:15,ssr:1,sss:3,state:1,has:false},
+			{index:12,name:'辉夜姬',xll:5,ssr:1,sss:1,state:0,has:false},
+			{index:13,name:'荒',xll:3,ssr:0,sss:1,state:0,has:false},
+			{index:14,name:'彼岸花',xll:10,ssr:0,sss:0,state:1,has:false}
+		]
+	},
+	mounted:function(){
+		for(var i=0;i<this.arr.length;i++){
+			this.arr[i].has = this.arr[i].xll+this.arr[i].ssr+this.arr[i].sss<50;
+		}
+	}
+});
+</script>
+</html>
