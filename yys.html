@@ -43,7 +43,7 @@ var arr = [
 	_html += '</tr></thead><tbody>';
 	for(var j=0;j<arr.length;j++){
 		var a=!(arr[j].xll+arr[j].ssr+arr[j].sss>=50||arr[j].state)?' class="has"':'';
-		_html+='<tr'+a+'><td>'+arr[j].index+'</td><td>'+arr[j].name+'</td><td>'+arr[j].xll+'</td><td>'+arr[j].ssr+'</td><td>'+arr[j].sss+'</td><td>'+arr[j].state+'</td><td>'+(arr[j].state?'有':'没有')+'</td>';
+		_html+='<tr'+a+'><td>'+arr[j].index+'</td><td>'+arr[j].name+'</td><td>'+arr[j].xll+'</td><td>'+arr[j].ssr+'</td><td>'+arr[j].sss+'</td><td>'+(arr[j].xll+arr[j].ssr+arr[j].sss)+'</td><td>'+(arr[j].state?'有':'没有')+'</td>';
 	}
 	_html+='</tbody>';
 	document.getElementById('info').innerHTML=_html;
