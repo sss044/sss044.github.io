@@ -1,0 +1,77 @@
+/*  name   :  订单名称  
+	type   :  订单归属  
+	money  :  正为收入，负为支出。正号不用写
+	date   :  日期，如2016/10/20  只需填写 20 
+*/
+data[2019] = {
+	0:[
+		{name:'示例1',type:1,money:0},
+	],
+	1:[
+		{name:'示例1',type:1,money:0},
+	],
+	2:[
+		{name:'示例1',type:1,money:-13800},
+		{name:'示例1',type:0,money:-12190},
+		{name:'示例1',type:0,money:-518.3},
+		{name:'示例1',type:0,money:-452},
+	],
+	3:[
+		{name:'示例1',type:0,money:-302.5},
+		{name:'示例1',type:2,money:-806},
+		{name:'示例1',type:0,money:-680},
+		{name:'示例1',type:0,money:-299},
+		{name:'示例1',type:0,money:-20},
+		{name:'示例1',type:0,money:-317},
+		{name:'示例1',type:0,money:-86.28},
+	],
+	4:[
+		{name:'示例1',type:0,money:-24.5},
+		{name:'示例1',type:2,money:3146},
+		{name:'示例1',type:1,money:2000},
+		{name:'示例1',type:2,money:-310},
+	],
+	5:[
+		{name:'示例1',type:0,money:-7950},
+		{name:'示例1',type:1,money:-50},
+		{name:'示例1',type:2,money:-50},
+		{name:'示例1',type:0,money:-50},
+		{name:'示例1',type:1,money:3000},
+		{name:'示例1',type:1,money:2000},
+	],
+	6:[
+		{name:'示例1',type:0,money:-75.31},
+		{name:'示例1',type:1,money:-130},
+		{name:'示例1',type:1,money:3000},
+		{name:'示例1',type:1,money:2000},
+		{name:'示例1',type:1,money:1000},
+	],
+	7:[
+		{name:'示例1',type:0,money:-50},
+		{name:'示例1',type:1,money:3000},
+		{name:'示例1',type:0,money:-35.5},
+		{name:'示例1',type:2,money:-49.9},
+		{name:'示例1',type:2,money:-111},
+	],
+	8:[
+		{name:'示例1',type:2,money:-585},
+		{name:'示例1',type:2,money:-585},
+		{name:'示例1',type:2,money:-585},
+		{name:'示例1',type:2,money:-585},
+	],
+	9:[
+		{name:'示例1',type:1,money:-40},
+		{name:'示例1',type:1,money:-103.5},
+		{name:'示例1',type:1,money:-112},
+	],
+	10:[
+		{name:'示例1',type:0,money:-76.02},
+		{name:'示例1',type:0,money:-20.3},
+	],
+	11:[
+		{name:'示例1',type:1,money:-130},
+		{name:'示例1',type:0,money:-101.2},
+		{name:'示例1',type:0,money:-77.76},
+		{name:'示例1',type:1,money:-224.8},
+	]
+};

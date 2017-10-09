@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <title>calc</title>
+    <script src="static/js/vue.min.js"></script>
+</head>
+<body>
+<main id="app">
+	<div class="item">
+		<div class="part">
+			<input v-model="area" @input="refreshData" /><label>方</label>
+		</div>
+		<div class="part">
+			<input v-model="price" @input="refreshData" /><label>万</label>
+		</div>
+		<div class="part">
+			<input v-model="year" @input="refreshData" /><label>年</label>
+		</div>
+		<div class="part">
+			<input v-model="percent" @input="refreshData" /><label>%</label>
+		</div>
+	</div>
+	<div class="item">
+		<div class="part">
+			<label>存款：</label><input v-model="all" @input="refreshData" />
+		</div>
+		<div class="part">
+			<label>月收入：</label><input v-model="income" @input="refreshData" />
+		</div>
+		<div class="part">
+			<label>月支出：</label><input v-model="outcome" @input="refreshData" />
+		</div>
+	</div>
+	<div class="item">
+		<div class="part">
+			<label>总价：</label>{{ format().toFixed(2) + '万' }}
+			<label>首付：</label>{{ firstPay.toFixed(2) + '万' }}
+		</div>
+	</div>
+	<div class="item">
+		<label>月供(按应还款2倍粗略计算)：</label>{{ monthPay.toFixed(2) + '万' }}
+	</div>
+	<div class="item">
+		<div class="part">
+			<label>存款：</label>{{ ( all / 10000 ).toFixed(2) + '万' }}
+			<label>年净收入：</label>{{ pureIncome.toFixed(2) + '万' }}
+		</div>
+	</div>
+	<div class="item">
+		<label>攒够首付需：</label>{{ allYear.toFixed(2) + '年' }}
+		<label>还月供后可支配收入：</label>{{ isNaN(usefulIncome) ? usefulIncome : usefulIncome.toFixed(2) }}
+	</div>
+</main>
+<script>
+var app = new Vue({
+	el:'#app',
+	data(){
+		return {
+			area:89,
+			price:3,
+			year:30,
+			percent:30,
+			income:6000,
+			outcome:2000,
+			all:50000,
+			firstPay:0,
+			monthPay:0,
+			pureIncome:0,
+			allYear:0,
+			usefulIncome:0
+		}
+	},
+	methods:{
+		format(){
+			let res = this.area * this.price;
+			if( !isNaN(res) ){
+				return res;
+			}else{
+				return 0;
+			}
+		},
+		getFirstPay(){
+			this.firstPay =  this.format() *this.percent / 100
+		},
+		getMonthPay(){
+			this.monthPay = ( this.area * this.price ) * ( 1 - this.percent / 100 ) * 2 / this.year / 12;
+		},
+		getPureIncome(){
+			this.pureIncome =  ( this.income - this.outcome ) * 12 / 10000;
+		},
+		getAllYear(){
+			this.allYear = ((this.format() * this.percent / 100) - this.all / 10000) / (( this.income - this.outcome ) * 12 / 10000);
+		},
+		getUsefulIncome(){
+			this.usefulIncome = this.income - this.monthPay * 10000 >= 0 ? this.usefulIncome =  this.income - this.monthPay * 10000 : '月供都还不起';
+		},
+		refreshData(){
+			this.getFirstPay();
+			this.getMonthPay();
+			this.getPureIncome();
+			this.getAllYear();
+			this.getUsefulIncome();
+		}
+	},
+	mounted(){
+		this.refreshData();
+	}
+});
+</script>
+<style>
+	*{
+		font-family:'微软雅黑',sans-serif;
+		font-size:16px;
+	}
+	#app{
+		margin:200px auto;
+		text-align:center;
+		color:#444;
+	}
+	.part{
+		display:inline-block;
+		margin-right:20px;
+	}
+	.text-red{
+		color:#FF4949;
+
+	}
+	.text-red,.text-green{font-size:18px;}
+	.text-green{
+		color:#13CE66;
+	}
+	.item{
+		margin-bottom:20px;
+	}
+	label{
+		margin-left:8px;
+	}
+	input{
+		width:80px;
+		height:24px;
+		border-radius:4px;
+		border:1px solid #ddd;
+		outline:none;
+		padding-left:4px;
+	}
+	input:focus{
+		border-color:#555;
+	}
+</style>
+</body>
+</html>
