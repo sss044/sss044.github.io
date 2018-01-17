@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>物品清单查询</title>
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <style>
         header{
             padding:10px;
@@ -33,7 +33,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in result">
+        <tr ng-repeat="item in result" ng-if="item.name!==''">
             <td>{{item.name}}</td>
             <td>{{item.box}}</td>
             <td>{{item.place}}</td>
@@ -42,7 +42,7 @@
     </table>
 </div>
 </body>
-<script src="//cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+<script src="http://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
 <script>
     var table = angular.module('table',[]);
     table.controller('tableCtrl',function($scope){
@@ -179,7 +179,36 @@
             {name:'保鲜袋',box:'无', place:'高柜抽屉',master:'c,s'},
             {name:'红镯子',box:'紫花袋', place:'高柜抽屉',master:'s'},
             {name:'荣耀V9盒子（含VR眼镜、保修卡）',box:'无', place:'高柜抽屉',master:'c'},
-           /* {name:'',box:'', place:'',master:''},
+            {name:'《大国崛起》',box:'无', place:'茶几',master:'c'},
+            {name:'《追风筝的人》',box:'无', place:'茶几',master:'c'},
+            {name:'《HTML-CSS入门》',box:'无', place:'茶几',master:'c'},
+            {name:'《配色方案》',box:'无', place:'茶几',master:'c'},
+            {name:'《秘密花园》',box:'无', place:'茶几',master:'c'},
+            {name:'《JavaScript权威指南》',box:'无', place:'茶几',master:'c'},
+            {name:'《傲慢与偏见》',box:'无', place:'茶几',master:'c'},
+            {name:'《从零开始学炒股》',box:'无', place:'茶几',master:'c'},
+            {name:'扑克牌、围棋',box:'无', place:'茶几',master:'s'},
+            {name:'备用纽扣',box:'小红包', place:'茶几',master:'c，s'},
+            {name:'肥皂×2',box:'无', place:'茶几',master:'c，s'},
+            {name:'针线盒',box:'无', place:'茶几',master:'c，s'},
+            {name:'笔芯',box:'无', place:'茶几',master:'c，s'},
+            {name:'病历本',box:'无', place:'茶几',master:'c，s'},
+            {name:'羽毛球',box:'羽毛球盒', place:'茶几',master:'c，s'},
+            {name:'彩色铅笔',box:'无', place:'茶几',master:'c'},
+            {name:'大透明胶',box:'无', place:'茶几',master:'c，s'},
+            {name:'眼镜盒×2',box:'无', place:'茶几',master:'s'},
+            {name:'蛋糕盒',box:'无', place:'茶几',master:'s'},
+            {name:'水晶盒',box:'无', place:'茶几',master:'s'},
+            {name:'蟑螂盒',box:'无', place:'茶几',master:'c，s'},
+            {name:'零钱盒',box:'无', place:'茶几',master:'c'},
+            {name:'剪刀',box:'黑白盒', place:'无',master:'c，s'},
+            {name:'台币盒',box:'黑白盒', place:'无',master:'c'},
+            {name:'工作证（龙蛇）',box:'黑白盒', place:'无',master:'c'},
+            {name:'小锁',box:'黑白盒', place:'无',master:'c'},
+            {name:'话筒耳机',box:'黑白盒', place:'无',master:'s'},
+            {name:'洗漱发带',box:'黑白盒', place:'无',master:'s'},
+            {name:'热水袋（紫色）充电线',box:'黑白盒', place:'无',master:'s'},
+            {name:'多功能螺丝刀',box:'黑白盒', place:'无',master:'c'},
             {name:'',box:'', place:'',master:''},
             {name:'',box:'', place:'',master:''},
             {name:'',box:'', place:'',master:''},
@@ -226,30 +255,6 @@
             {name:'',box:'', place:'',master:''},
             {name:'',box:'', place:'',master:''},
             {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},
-            {name:'',box:'', place:'',master:''},*/
         ];
         $scope.result =  $scope.list;
         $scope.key = '';

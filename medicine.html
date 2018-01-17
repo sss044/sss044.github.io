@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>药品清单</title>
-    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <style>
         header{
             padding:10px;
@@ -17,15 +17,16 @@
         }
     </style>
 </head>
-<body ng-app="table" ng-controller="tableCtrl">
+<body>
+<div id="table">
 <header class="text-center">
     <h4>药品清单</h4>
 </header>
 <div class="container">
     <div class="filter"></div>
     <div class="search input-group">
-        <input type="text" class="form-control" placeholder="输入关键词" name="search" id="search" ng-model="key">
-        <button class="input-group-addon" ng-click="search(key)">搜索</button>
+        <input type="text" class="form-control" placeholder="输入关键词" name="search" id="search" v-model="key">
+        <button class="input-group-addon" @click="search(key)">搜索</button>
     </div>
     <table class="table table-striped">
         <thead>
@@ -37,21 +38,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in result">
+        <tr v-for="item in result">
             <td>{{item.name}}</td>
             <td>{{item.effect}}</td>
             <td>{{item.amount}}</td>
-            <td class="{{timeCheck(item.datetime)}}">{{item.datetime}}</td>
+            <td :class="{overdue:timeCheck(item.datetime)}">{{item.datetime}}</td>
         </tr>
         </tbody>
     </table>
 </div>
+</div>
 </body>
-<script src="//cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+<script src="vue.min.js"></script>
 <script>
-    var table = angular.module('table',[]);
-    table.controller('tableCtrl',function($scope){
-        $scope.list = [
+var app = new Vue({
+    el:'#table',
+    data:function(){
+        return {
+            list:[],
+            key:'',
+            result:[
             {name:'当归苦参丸',effect:'凉血，祛湿。头面生疮，粉刺疙瘩等。',amount:3,datetime:'2017-8-24'},
             {name:'盐酸多西环素胶囊',effect:'非特异性尿道炎、输卵管炎、宫颈炎等。',amount:2,datetime:'2017-12-11'},
             {name:'金刚藤丸',effect:'附件炎等妇科疾病',amount:4,datetime:'2019-1-9'},
@@ -64,33 +70,49 @@
             {name:'头孢克污分散片',effect:'消炎（处方药，不能乱吃）',amount:2,datetime:'2017-11-1'},
             {name:'聚维酮碘溶液',effect:'杀菌消毒',amount:1,datetime:'2018-5-1'},
             {name:'Hirudoid forte',effect:'泰国祛疤膏',amount:1,datetime:'未知'},
-            {name:'辣椒碱乳膏',effect:'缓减风湿痛，肌肉关节背部扭伤拉伤',amount:1,datetime:'2017-9-1'}
+            {name:'辣椒碱乳膏',effect:'缓减风湿痛，肌肉关节背部扭伤拉伤',amount:1,datetime:'2017-9-1'}]
+        }
+    },
+    methods:{
+        timeCheck:function(time){
+            var date = new Date();
+            return new Date(time).getTime()<date.getTime();
+        },
+        search(key){
+            var that = this;
+            that.result = [];
+            for( var i = 0 ; i < that.list.length ; i++ ){
+                if(that.list[i].name.indexOf(key)!==-1 || that.list[i].effect.indexOf(key)!==-1 || that.list[i].place.indexOf(key.name)!==-1){
+                    that.result.push(that.list[i]);
+                }
+            }
+        }
+
+    },
+    mounted:function(){
+        var that = this;
+        document.addEventListener('keyup',function(e){
+            var ev = e || event;
+            if( ev.keyCode === 13 ){
+                that.search($scope.key);
+            }
+        },false);
+    }
+})
+ /*   var table = angular.module('table',[]);
+    table.controller('tableCtrl',function($scope){
+        $scope.list = [
+            
         ];
         $scope.result =  $scope.list;
         $scope.key = '';
         $scope.search = function(key){
-            $scope.result = [];
-            for( var i = 0 ; i < $scope.list.length ; i++ ){
-                if($scope.list[i].name.indexOf(key)!==-1 || $scope.list[i].effect.indexOf(key)!==-1 || $scope.list[i].place.indexOf(key.name)!==-1){
-                    $scope.result.push($scope.list[i]);
-                }
-            }
+            
         };
         $scope.timeCheck = function(time){
-            console.log(new Date(time));
-            var date = new Date();
-            if(new Date(time).getTime()<date.getTime()){
-                return 'overdue';
-            }else{
-                return '';
-            }
+           
         };
-        document.addEventListener('keyup',function(e){
-            var ev = e || event;
-            if( ev.keyCode === 13 ){
-                $scope.search($scope.key);
-            }
-        },false);
-    });
+        
+    });*/
 </script>
 </html>
